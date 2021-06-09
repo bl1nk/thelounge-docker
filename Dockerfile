@@ -14,6 +14,30 @@ CMD ["thelounge", "start"]
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
+# Compile libvips.
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    glib2.0-dev \
+    imagemagick \
+    libexif-dev \
+    libexpat1-dev \
+    libgsf-1-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libtiff5-dev \
+    libwebp-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/* && apt-get clean
+
+ARG LIBVIPS_VERSION=8.10.6
+RUN curl -fsSLO --compressed "https://github.com/libvips/libvips/releases/download/v${LIBVIPS_VERSION}/vips-${LIBVIPS_VERSION}.tar.gz" && \
+    tar -xf vips-${LIBVIPS_VERSION}.tar.gz && \
+    cd vips-${LIBVIPS_VERSION} && \
+    ./configure && \
+    make && \
+    make install && \
+    ldconfig
+
 # Install thelounge.
 ARG THELOUNGE_VERSION=4.3.0-pre.2
 RUN yarn --non-interactive --frozen-lockfile global add thelounge@${THELOUNGE_VERSION} && \
