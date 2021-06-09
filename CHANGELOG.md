@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.3.0-pre.2 (2021-06-09)
+- Bump [`thelounge`][1] to [`4.3.0-pre.2`](https://github.com/thelounge/thelounge/releases/tag/v4.3.0-pre.2).
+
 ## 4.3.0-pre.1 (2021-03-16)
 - Bump [`thelounge`][1] to [`4.3.0-pre.1`](https://github.com/thelounge/thelounge/releases/tag/v4.3.0-pre.1).
 - Bump Node version from 12 to 14 (LTS).
