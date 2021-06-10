@@ -16,6 +16,10 @@ COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 # XXX: libvips needs to be compiled from source because at the time of writing
 # this comment (2021-06-09) no prebuilt binaries existed for arm7.
+#
+# Check https://github.com/libvips/libvips/releases for newer versions if
+# needed.
+ARG LIBVIPS_VERSION=8.10.6
 RUN apt-get update && apt-get install -y \
     build-essential \
     glib2.0-dev \
@@ -27,12 +31,10 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libtiff5-dev \
     libwebp-dev \
-    pkg-config \
-    && rm -rf /var/lib/apt/lists/* && apt-get clean
-
-# Check https://github.com/libvips/libvips/releases for newer versions if needed.
-ARG LIBVIPS_VERSION=8.10.6
-RUN curl -fsSLO --compressed "https://github.com/libvips/libvips/releases/download/v${LIBVIPS_VERSION}/vips-${LIBVIPS_VERSION}.tar.gz" && \
+    pkg-config  && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean && \
+    curl -fsSLO --compressed "https://github.com/libvips/libvips/releases/download/v${LIBVIPS_VERSION}/vips-${LIBVIPS_VERSION}.tar.gz" && \
     tar -xf vips-${LIBVIPS_VERSION}.tar.gz && \
     cd vips-${LIBVIPS_VERSION} && \
     ./configure && \
