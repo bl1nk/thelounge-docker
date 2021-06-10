@@ -35,8 +35,8 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/* && \
     apt-get clean && \
     curl -fsSLO --compressed "https://github.com/libvips/libvips/releases/download/v${LIBVIPS_VERSION}/vips-${LIBVIPS_VERSION}.tar.gz" && \
-    tar -xf vips-${LIBVIPS_VERSION}.tar.gz && \
-    cd vips-${LIBVIPS_VERSION} && \
+    tar -xf "vips-${LIBVIPS_VERSION}.tar.gz" && \
+    cd "vips-${LIBVIPS_VERSION}" && \
     ./configure && \
     make && \
     make install && \

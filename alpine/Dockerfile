@@ -31,13 +31,13 @@ RUN apk add --no-cache --upgrade --virtual .libvips-deps \
     libwebp-dev \
     pkgconfig \
     tiff-dev && \
-    wget -O vips-${LIBVIPS_VERSION}.tar.gz -q "https://github.com/libvips/libvips/releases/download/v${LIBVIPS_VERSION}/vips-${LIBVIPS_VERSION}.tar.gz" && \
-    tar -xf vips-${LIBVIPS_VERSION}.tar.gz && \
-    cd vips-${LIBVIPS_VERSION} && \
+    wget -O "vips-${LIBVIPS_VERSION}.tar.gz" -q "https://github.com/libvips/libvips/releases/download/v${LIBVIPS_VERSION}/vips-${LIBVIPS_VERSION}.tar.gz" && \
+    tar -xf "vips-${LIBVIPS_VERSION}.tar.gz" && \
+    cd "vips-${LIBVIPS_VERSION}" && \
     ./configure && \
     make && \
     make install && \
-    ldconfig /lib/ld-musl-$(uname -m).so.1 && \
+    ldconfig "/lib/ld-musl-$(uname -m).so.1" && \
     apk del --purge .libvips-deps
 
 # Install thelounge.
